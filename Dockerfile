@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-alpine
 COPY myapp/target/*.jar /app/app.jar
 WORKDIR /app
-ENV JAR_FILE=your-app.jar
+ENV JAR_FILE=app.jar
 RUN adduser -D myuser
 USER myuser
 CMD ["java", "-jar", "${JAR_FILE}"]
