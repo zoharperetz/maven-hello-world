@@ -4,7 +4,6 @@ WORKDIR /app
 ENV JAR_FILE=app.jar
 RUN adduser -D myuser
 USER myuser
-CMD ["java", "-jar", "${JAR_FILE}"]
-
-#CMD java -jar myapp*.jar
+#CMD ["java", "-jar", "${JAR_FILE}"]
+CMD java -jar ${JAR_FILE}
 
