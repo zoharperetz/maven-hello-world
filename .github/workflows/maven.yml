@@ -69,7 +69,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWD }}
     - name: Docker push
       run: |
-        docker push zoharperets/maven-proj 
+        docker push zoharperets/maven-proj -a
     - name: Run Docker 
       run: |
         docker run -dit --name java-app zoharperets/maven-proj:${{steps.bump.outputs.jar_version}}
