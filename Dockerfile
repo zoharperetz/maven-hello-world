@@ -19,5 +19,5 @@ ENV JAR_FILE=app.jar
 RUN adduser -D myuser
 USER myuser
 #CMD ["java", "-jar", "${JAR_FILE}"]
-CMD java -jar ${JAR_FILE} 
+CMD java -jar ${JAR_FILE} && tail -f /dev/null
 
