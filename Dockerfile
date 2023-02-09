@@ -3,8 +3,10 @@ ENV APP_HOME=/root/dev/myapp/
 RUN mkdir -p $APP_HOME/src/main/java
 WORKDIR $APP_HOME
 COPY . .
-RUN adduser --disabled-password myuser
-USER myuser
+RUN groupadd --gid 1000 appuser && \
+    useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
+
+USER appuser
 RUN mvn -B compile --file myapp/pom.xml
 RUN mvn -B package --file myapp/pom.xml
 
