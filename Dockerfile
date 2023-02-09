@@ -11,6 +11,6 @@ WORKDIR /app
 RUN addgroup -g 1000 appuser && \
     adduser -u 1000 -G appuser -s /bin/sh -D appuser
 USER appuser
-CMD ["java", "-jar", "app.jar"]
+CMD java -jar app.jar && tail -f /dev/null
 
 
