@@ -4,6 +4,7 @@ WORKDIR $APP_HOME
 RUN groupadd --gid 1000 appuser && \
     useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
 RUN chown -R appuser:appuser $APP_HOME
+RUN exec runuser -u appuser "$@"
 USER appuser
 RUN mkdir -p /app
 WORKDIR $APP_HOME/app
