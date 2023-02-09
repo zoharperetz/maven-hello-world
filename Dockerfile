@@ -1,6 +1,6 @@
 FROM maven:3-alpine as BUILD
 WORKDIR /root/dev/
-COPY myapp/ .
+COPY myapp/ <workdir>/myapp/
 RUN mvn -B compile --file myapp/pom.xml
 RUN mvn -B package --file myapp/pom.xml
 
