@@ -45,11 +45,6 @@ jobs:
         echo "pom.xml at" $POMPATH "will be bumped from" $OLD_VERSION "to" $NEW_VERSION
         mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file $POMPATH/pom.xml
         echo ::set-output name=jar_version::${NEW_VERSION}
-    #- name: Compile
-      #run: mvn -B compile --file myapp/pom.xml
-
-    #- name: Build a package
-     # run: mvn -B package --file myapp/pom.xml
 
     - name: Temporarily save jar artifact
       uses: actions/upload-artifact@v2
