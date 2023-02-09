@@ -7,6 +7,7 @@ RUN groupadd --gid 1000 appuser && \
     useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
 
 USER appuser
+RUN chown appuser:appuser myapp/pom.xml
 RUN mvn -B compile --file myapp/pom.xml
 RUN mvn -B package --file myapp/pom.xml
 
