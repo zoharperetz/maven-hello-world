@@ -13,7 +13,7 @@ RUN mvn -B package --file myapp/pom.xml
 
 
 FROM openjdk:8-jdk-alpine
-COPY --from=BUILD /root/dev/myapp/myapp/target/*.jar /app/app.jar
+COPY --from=BUILD /root/dev/myapp/target/*.jar /app/app.jar
 WORKDIR /app
 RUN adduser -D myuser
 USER myuser
