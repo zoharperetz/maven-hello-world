@@ -1,10 +1,10 @@
 FROM maven:3 as BUILD
 WORKDIR /root/dev/
-RUN mkdir -p /app
-WORKDIR /app
+#RUN mkdir -p /app
+#WORKDIR /app
 RUN groupadd --gid 1000 appuser && \
     useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appuser /root/dev/
 USER appuser
 COPY . .
 #RUN groupadd --gid 1000 appuser && \
@@ -18,7 +18,7 @@ RUN mvn -B package --file myapp/pom.xml
 
 
 FROM openjdk:8-jdk-alpine
-COPY --from=BUILD /root/dev/app/myapp/target/*.jar /app/app.jar
+COPY --from=BUILD /root/dev/myapp/target/*.jar /app/app.jar
 WORKDIR /app
 RUN adduser -D myuser
 USER myuser
