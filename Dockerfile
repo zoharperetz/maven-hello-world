@@ -1,9 +1,10 @@
 FROM maven:3 as BUILD
 ENV APP_HOME=/root/dev/
+WORKDIR $APP_HOME
 RUN groupadd --gid 1000 appuser && \
     useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
 USER appuser
-RUN mkdir -p $APP_HOME/app
+RUN mkdir -p /app
 WORKDIR $APP_HOME/app
 COPY . .
 #RUN groupadd --gid 1000 appuser && \
