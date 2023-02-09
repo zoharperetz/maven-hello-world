@@ -3,7 +3,7 @@ ENV APP_HOME=/root/dev/
 WORKDIR $APP_HOME
 RUN groupadd --gid 1000 appuser && \
     useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
-RUN chown -R appuser:uppuser $APP_HOME
+RUN chown -R appuser:appuser $APP_HOME
 USER appuser
 RUN mkdir -p /app
 WORKDIR $APP_HOME/app
