@@ -68,7 +68,7 @@ jobs:
     - name: Run Docker 
       run: |
         docker run -dit --name java-app zoharperets/maven-proj:${{steps.bump.outputs.jar_version}}
-    - name: push to github
+    - name: Push to Github
       run: |
        git config --global user.email ${{ secrets.EMAIL_GITHUB }}
        git config --global user.name ${{ secrets.USERNAME_GITHUB }}
