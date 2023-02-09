@@ -1,11 +1,11 @@
 FROM maven:3 as BUILD
 WORKDIR /root/dev/
-RUN mkdir -p /myapp
-WORKDIR /myapp
-RUN groupadd --gid 1000 appuser && \
-    useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
-RUN chown -R appuser:appuser /myapp
-USER appuser
+#RUN mkdir -p /myapp
+#WORKDIR /myapp
+#RUN groupadd --gid 1000 appuser && \
+   # useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
+#RUN chown -R appuser:appuser /myapp
+#USER appuser
 COPY . .
 #RUN chown appuser:appuser myapp/pom.xml
 RUN mvn -B compile --file myapp/pom.xml
