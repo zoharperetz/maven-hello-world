@@ -1,11 +1,11 @@
 FROM maven:3 as BUILD
 WORKDIR /root/dev/
-#RUN mkdir -p /app
-#WORKDIR /app
 RUN groupadd --gid 1000 appuser && \
     useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
 RUN chown -R appuser:appuser /root/dev/
 USER appuser
+RUN mkdir -p /myapp
+WORKDIR /myapp
 COPY . .
 #RUN groupadd --gid 1000 appuser && \
     #useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home appuser
