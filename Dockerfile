@@ -3,7 +3,7 @@ ENV APP_HOME=/root/dev/myapp/
 RUN mkdir -p $APP_HOME/src/main/java
 WORKDIR $APP_HOME
 COPY . .
-RUN adduser -D myuser
+RUN adduser --disabled-password myuser
 USER myuser
 RUN mvn -B compile --file myapp/pom.xml
 RUN mvn -B package --file myapp/pom.xml
