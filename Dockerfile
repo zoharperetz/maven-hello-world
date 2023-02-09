@@ -7,7 +7,7 @@ RUN adduser -D myuser
 USER myuser
 RUN mvn -B compile --file myapp/pom.xml
 RUN mvn -B package --file myapp/pom.xml
-#RUN mvn -B package -e -X --file myapp/pom.xml
+
 
 FROM openjdk:8-jdk-alpine
 COPY --from=BUILD /root/dev/myapp/myapp/target/*.jar /app/app.jar
@@ -16,5 +16,5 @@ ENV JAR_FILE=app.jar
 RUN adduser -D myuser
 USER myuser
 #CMD ["java", "-jar", "${JAR_FILE}"]
-CMD java -jar ${JAR_FILE} && tail -f /dev/null
+CMD java -jar ${JAR_FILE} 
 
