@@ -70,6 +70,14 @@ jobs:
     - name: Docker push
       run: |
         docker push zoharperets/maven-proj -a
+    - name: Pull Docker image
+      uses: docker/pull-action@v2
+      with:
+        args: zoharperets/maven-proj:${{steps.bump.outputs.jar_version}}  
+    - name: Run Docker image
+      uses: docker/run-action@v1
+      with:
+        args: sh -c "echo Hello from Docker!"
     - name: push to github
       run: |
        git config --global user.email "zoharperets92@gmail.com"
