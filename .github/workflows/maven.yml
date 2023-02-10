@@ -44,8 +44,9 @@ jobs:
        # NEW_VERSION="${parts[0]}.${parts[1]}.${bv}"
        # mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file $POMPATH/pom.xml
        # echo ::set-output name=jar_version::${NEW_VERSION}    
+       
     - name: Bump version
-      uses: actions/version@v2
+      uses: actions/version@v1
       with:
         increment: patch
         file-glob: myapp/pom.xml
