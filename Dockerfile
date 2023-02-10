@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-7-alpine as BUILD
+FROM maven:3.7-jdk-7-alpine as BUILD
 WORKDIR /root/dev/
 COPY . .
 RUN mvn -B compile --file myapp/pom.xml
