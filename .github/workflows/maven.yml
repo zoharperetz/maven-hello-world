@@ -47,14 +47,14 @@ jobs:
     - name: Docker build & tests
       working-directory: ./
       run: |
-         docker build --no-cache --build-arg POM=${{steps.bump.outputs.jar_version}} -t zoharperets/maven-proj:${{steps.bump.outputs.jar_version}} .
+         docker build --no-cache -t zoharperets/maven-proj:${{steps.bump.outputs.jar_version}} .
          
-    - name:  Save jar artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: jar-artifact
-        path: ${{ github.workspace }}/myapp/target/*.jar
-        retention-days: 1
+    #- name:  Save jar artifact
+      #uses: actions/upload-artifact@v2
+      #with:
+        #name: jar-artifact
+        #path: ${{ github.workspace }}/myapp/target/*.jar
+        #retention-days: 1
     
     - name: Login to Docker Hub
       uses: docker/login-action@v2
