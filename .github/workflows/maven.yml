@@ -36,7 +36,7 @@ jobs:
       id: bump
       run: |
         POMPATH=myapp
-        OLD_VERSION=$(mvn -q help:evaluate -Dexpression=project.version -DforceStandalone=true -f $POMPATH/pom.xml | grep -v '\[.*\]')
+        OLD_VERSION=$(cd $POMPATH && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         #OLD_VERSION=$(grep -m1 "<version>" $POMPATH/pom.xml | sed -E 's|<version>(.*)</version>|\1|g' | tr -d '[:space:]')
         PARTS=(${OLD_VERSION//./ }) 
         PATCH=$((PARTS[2] + 1))
