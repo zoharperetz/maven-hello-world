@@ -18,8 +18,6 @@ jobs:
     permissions:
       contents: write
       packages: write
-    outputs:
-      jar_version: ${{ steps.bump.outputs.jar_version }}
 
     steps:
     - uses: actions/checkout@v3
@@ -42,7 +40,6 @@ jobs:
         PATCH=$((PARTS[2] + 1))
         NEW_VERSION="${PARTS[0]}.${PARTS[1]}.${PATCH}"
         mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file $POMPATH/pom.xml
-        #echo ::set-output name=jar_version::${NEW_VERSION}
         echo "jar_version=$NEW_VERSION" >> $GITHUB_OUTPUT
       
         
