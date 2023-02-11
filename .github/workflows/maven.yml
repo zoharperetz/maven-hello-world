@@ -50,7 +50,7 @@ jobs:
         path: ${{ github.workspace }}/myapp/target/*.jar
         retention-days: 1
         
-    - name: Docker build $ tests
+    - name: Docker build & tests
       working-directory: ./
       run: |
          docker build --no-cache --build-arg POM=${{steps.bump.outputs.jar_version}} -t zoharperets/maven-proj:${{steps.bump.outputs.jar_version}} .
