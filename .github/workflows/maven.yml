@@ -35,15 +35,26 @@ jobs:
     - name: Bump jar version
       id: bump
       run: |
+        #POMPATH=myapp
+        #OLD_VERSION=$(cd $POMPATH && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        #BUMP_MODE="none"
+        #old="$OLD_VERSION"
+        #parts=( ${old//./ } )
+        #bv=$((parts[2] + 1))
+        #NEW_VERSION="${parts[0]}.${parts[1]}.${bv}"
+        #mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file $POMPATH/pom.xml
+        #echo ::set-output name=jar_version::${NEW_VERSION} 
         POMPATH=myapp
-        OLD_VERSION=$(cd $POMPATH && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        OLD_VERSION=$(grep -m1 "<version>" $POMPATH/pom.xml | sed -E 's|<version>(.*)</version>|\1|g')
         BUMP_MODE="none"
-        old="$OLD_VERSION"
-        parts=( ${old//./ } )
-        bv=$((parts[2] + 1))
-        NEW_VERSION="${parts[0]}.${parts[1]}.${bv}"
-        mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file $POMPATH/pom.xml
-        echo ::set-output name=jar_version::${NEW_VERSION}    
+        OLD_IFS=$IFS
+        IFS='.'
+        read -ra PARTS <<< "$OLD_VERSION"
+        IFS=$OLD_IFS
+        BV=$((PARTS[2] + 1))
+        NEW_VERSION="${PARTS[0]}.${PARTS[1]}.${BV}"
+        sed -i "s|<version>$OLD_VERSION</version>|<version>$NEW_VERSION</version>|g" $POMPATH/pom.xml
+        echo ::set-output name=jar_version::${NEW_VERSION}
       
     - name:  save jar artifact
       uses: actions/upload-artifact@v2
