@@ -42,7 +42,8 @@ jobs:
         PATCH=$((PARTS[2] + 1))
         NEW_VERSION="${PARTS[0]}.${PARTS[1]}.${PATCH}"
         mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file $POMPATH/pom.xml
-        echo ::set-output name=jar_version::${NEW_VERSION}
+        #echo ::set-output name=jar_version::${NEW_VERSION}
+        echo "jar_version=$NEW_VERSION" >> $GITHUB_OUTPUT
       
         
     - name: Docker build & tests
