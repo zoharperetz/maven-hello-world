@@ -53,6 +53,7 @@ jobs:
         IFS=$OLD_IFS
         BV=$((PARTS[2] + 1))
         NEW_VERSION="${PARTS[0]}.${PARTS[1]}.${BV}"
+        NEW_VERSION="${NEW_VERSION#"${NEW_VERSION%%[![:space:]]*}"}"
         sed -i "s|<version>$OLD_VERSION</version>|<version>$NEW_VERSION</version>|g" $POMPATH/pom.xml
         echo ::set-output name=jar_version::${NEW_VERSION}
       
