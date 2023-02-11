@@ -45,7 +45,7 @@ jobs:
      
     - name: Run Maven tests
       run: |
-         mvn test -f $POMPATH/pom.xml
+         mvn test -f myapp/pom.xml
       
     - name:  save jar artifact
       uses: actions/upload-artifact@v2
