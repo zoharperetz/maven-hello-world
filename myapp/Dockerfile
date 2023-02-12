@@ -10,8 +10,8 @@ RUN mvn -B package --file pom.xml
 FROM openjdk:8-jdk-alpine
 COPY --from=BUILD /root/dev/myapp/target/*.jar /app/app.jar
 WORKDIR /app
-RUN addgroup -r appuser && \
-    adduser -G appuser -s /bin/sh -D appuser
+RUN addgroup appuser && \
+    adduser -G appuser -D appuser
 USER appuser
 CMD java -jar app.jar 
 
