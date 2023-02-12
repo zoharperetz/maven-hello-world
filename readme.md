@@ -1,147 +1,44 @@
-# A simple, minimal Maven example: hello world
+# README File for GitHub Actions Workflow
 
-To create the files in this git repo we've already run `mvn archetype:generate` from http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
-    
-    mvn archetype:generate -DgroupId=com.myapp.app -DartifactId=myapp -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+This workflow is designed to build a Maven project, push a Docker image to Docker Hub, and deploy the application. The workflow consists of two jobs: "build" and "deploy".
 
-Now, to print "Hello World!", type either...
+# Job: Build
 
-    cd myapp
-    mvn compile
-    java -cp target/classes com.myapp.app.App
+The "build" job performs the following tasks:
 
-or...
+    Check out the source code from GitHub repository
+    Set up Java Development Kit (JDK) 8
+    Bump the version of the jar file
+    Build a Docker image and run tests
+    Login to Docker Hub
+    Push the Docker image to Docker Hub
+    Push the updated version of the jar file to the GitHub repository
 
-    cd myapp
-    mvn package
-    java -cp target/myapp-1.0-SNAPSHOT.jar com.myapp.app.App
+# Job: Deploy
 
-Running `mvn clean` will get us back to only the source Java and the `pom.xml`:
+The "deploy" job performs the following tasks:
 
-    murphy:myapp pdurbin$ mvn clean --quiet
-    murphy:myapp pdurbin$ ack -a -f
-    pom.xml
-    src/main/java/com/myapp/app/App.java
-    src/test/java/com/myapp/app/AppTest.java
+    Login to Docker Hub
+    Run the Docker image
 
-Running `mvn compile` produces a class file:
+# Requirements
 
-    murphy:myapp pdurbin$ mvn compile --quiet
-    murphy:myapp pdurbin$ ack -a -f
-    pom.xml
-    src/main/java/com/myapp/app/App.java
-    src/test/java/com/myapp/app/AppTest.java
-    target/classes/com/myapp/app/App.class
-    murphy:myapp pdurbin$ 
-    murphy:myapp pdurbin$ java -cp target/classes com.myapp.app.App
-    Hello World!
+Before using this workflow, make sure you have the following:
 
-Running `mvn package` does a compile and creates the target directory, including a jar:
+    A GitHub repository with the Maven project and pom.xml file
+    Docker Hub account with a repository to push the Docker image
+    The following secrets set in your GitHub repository:
+        GITHUB_TOKEN
+        DOCKERHUB_USERNAME
+        DOCKERHUB_PASSWD
+        EMAIL_GITHUB
+        USERNAME_GITHUB
 
-    murphy:myapp pdurbin$ mvn clean --quiet
-    murphy:myapp pdurbin$ mvn package > /dev/null
-    murphy:myapp pdurbin$ ack -a -f
-    pom.xml
-    src/main/java/com/myapp/app/App.java
-    src/test/java/com/myapp/app/AppTest.java
-    target/classes/com/myapp/app/App.class
-    target/maven-archiver/pom.properties
-    target/myapp-1.0-SNAPSHOT.jar
-    target/surefire-reports/com.myapp.app.AppTest.txt
-    target/surefire-reports/TEST-com.myapp.app.AppTest.xml
-    target/test-classes/com/myapp/app/AppTest.class
-    murphy:myapp pdurbin$ 
-    murphy:myapp pdurbin$ java -cp target/myapp-1.0-SNAPSHOT.jar com.myapp.app.App
-    Hello World!
+# How to Use
 
-Running `mvn clean compile exec:java` requires http://mojo.codehaus.org/exec-maven-plugin/
-
-Running `java -jar target/myapp-1.0-SNAPSHOT.jar` requires http://maven.apache.org/plugins/maven-shade-plugin/
-
-# Runnable Jar:
-JAR Plugin
-The Maven’s jar plugin will create jar file and we need to define the main class that will get executed when we run the jar file.
-```
-<plugin>
-  <artifactId>maven-jar-plugin</artifactId>
-  <version>3.0.2</version>
-  <configuration>
-    <archive>
-      <manifest>
-        <addClasspath>true</addClasspath>
-        <mainClass>com.myapp.App</mainClass>
-      </manifest>
-    </archive>
-  </configuration>
-</plugin>
-```
-
-
-# Folder tree before package:
-```
-├── pom.xml
-└── src
-    ├── main
-    │   └── java
-    │       └── com
-    │           └── myapp
-    │               └── app
-    │                   └── App.java
-    └── test
-        └── java
-            └── com
-                └── myapp
-                    └── app
-                        └── AppTest.java
-
-```
-# Folder tree after package:
-```
-
-.
-├── pom.xml
-├── src
-│   ├── main
-│   │   └── java
-│   │       └── com
-│   │           └── myapp
-│   │               └── app
-│   │                   └── App.java
-│   └── test
-│       └── java
-│           └── com
-│               └── myapp
-│                   └── app
-│                       └── AppTest.java
-└── target
-    ├── classes
-    │   └── com
-    │       └── myapp
-    │           └── app
-    │               └── App.class
-    ├── generated-sources
-    │   └── annotations
-    ├── generated-test-sources
-    │   └── test-annotations
-    ├── maven-archiver
-    │   └── pom.properties
-    ├── maven-status
-    │   └── maven-compiler-plugin
-    │       ├── compile
-    │       │   └── default-compile
-    │       │       ├── createdFiles.lst
-    │       │       └── inputFiles.lst
-    │       └── testCompile
-    │           └── default-testCompile
-    │               ├── createdFiles.lst
-    │               └── inputFiles.lst
-    ├── myapp-1.0-SNAPSHOT.jar
-    ├── surefire-reports
-    │   ├── com.myapp.app.AppTest.txt
-    │   └── TEST-com.myapp.app.AppTest.xml
-    └── test-classes
-        └── com
-            └── myapp
-                └── app
-                    └── AppTest.class
-```
+    Create a new branch in your GitHub repository
+    Copy the code from this README file into the main.yml file in the .github/workflows folder in your repository
+    Replace the values for the Docker repository name and Docker image name with your own
+    Commit the changes and push the branch to GitHub
+    Open a pull request to merge the branch into the master branch
+    The workflow will start automatically when the pull request is opened or when changes are pushed to the master branch.
