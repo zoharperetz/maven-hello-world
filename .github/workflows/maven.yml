@@ -35,7 +35,6 @@ jobs:
       run: |
         POMPATH=myapp
         OLD_VERSION=$(cd $POMPATH && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-        #OLD_VERSION=$(grep -m1 "<version>" $POMPATH/pom.xml | sed -E 's|<version>(.*)</version>|\1|g' | tr -d '[:space:]')
         PARTS=(${OLD_VERSION//./ }) 
         PATCH=$((PARTS[2] + 1))
         NEW_VERSION="${PARTS[0]}.${PARTS[1]}.${PATCH}"
@@ -46,7 +45,7 @@ jobs:
     - name: Docker build & tests
       working-directory: ./myapp
       run: |
-         docker build --no-cache -t zoharperets/maven-proj:${{steps.bump.outputs.jar_version}} .
+         docker build -t zoharperets/maven-proj:${{steps.bump.outputs.jar_version}} .
        
     
     - name: Login to Docker Hub
