@@ -44,7 +44,7 @@ jobs:
       
         
     - name: Docker build & tests
-      working-directory: ./
+      working-directory: ./myapp
       run: |
          docker build --no-cache -t zoharperets/maven-proj:${{steps.bump.outputs.jar_version}} .
        
