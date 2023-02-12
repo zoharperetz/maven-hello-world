@@ -2,9 +2,9 @@ FROM maven:3.6-jdk-8-alpine as BUILD
 RUN mkdir -p /root/dev/myapp/
 WORKDIR /root/dev/myapp/
 COPY pom.xml .
-RUN mvn install
+RUN mvn -B dependency:go-offline
 COPY . .
-RUN mvn -B compile --file pom.xml
+#RUN mvn -B compile --file pom.xml
 RUN mvn -B package --file pom.xml
 
 
