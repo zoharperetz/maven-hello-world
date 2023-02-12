@@ -18,6 +18,8 @@ jobs:
     permissions:
       contents: write
       packages: write
+    outputs:
+      jar_version: ${{ steps.bump.outputs.jar_version }}
 
     steps:
     - uses: actions/checkout@v3
