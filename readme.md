@@ -37,7 +37,7 @@ Before using this workflow, make sure you have the following:
 # How to Use
 
     Create a new branch in your GitHub repository
-    Copy the code from this README file into the main.yml file in the .github/workflows folder in your repository
+    Copy the code from this maven.yml into the main.yml file in the .github/workflows folder in your repository
     Replace the values for the Docker repository name and Docker image name with your own
     Commit the changes and push the branch to GitHub
     Open a pull request to merge the branch into the master branch
