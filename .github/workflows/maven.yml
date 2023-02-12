@@ -91,6 +91,6 @@ jobs:
      - name: Run Docker
        run: |
          VERSION=$(cd myapp && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-         docker run --name java-app zoharperets/maven-proj:$VERSION
-         #docker run --name java-app zoharperets/maven-proj:${{ needs.build.steps.bump.outputs.jar_version }}
+         #docker run --name java-app zoharperets/maven-proj:$VERSION
+         docker run --name java-app zoharperets/maven-proj:${{ needs.build.outputs.jar_version }}
 
