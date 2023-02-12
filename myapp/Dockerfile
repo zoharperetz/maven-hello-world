@@ -4,7 +4,6 @@ WORKDIR /root/dev/myapp/
 COPY pom.xml .
 RUN mvn -B dependency:go-offline
 COPY . .
-#RUN mvn -B compile --file pom.xml
 RUN mvn -B package --file pom.xml
 
 
