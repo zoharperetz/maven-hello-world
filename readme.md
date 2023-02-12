@@ -1,4 +1,4 @@
-# README File for GitHub Actions Workflow
+# Maven project to build and deploy Java app with Docker
 
 This workflow is designed to build a Maven project, push a Docker image to Docker Hub, and deploy the application. The workflow consists of two jobs: "build" and "deploy".
 
