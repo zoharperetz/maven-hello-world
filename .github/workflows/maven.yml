@@ -38,7 +38,7 @@ jobs:
         PARTS=(${OLD_VERSION//./ }) 
         PATCH=$((PARTS[2] + 1))
         NEW_VERSION="${PARTS[0]}.${PARTS[1]}.${PATCH}"
-        mvn -q versions:set -DnewVersion="${NEW_VERSION}"
+        mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file /myapp/pom.xml
         echo "jar_version=$NEW_VERSION" >> $GITHUB_OUTPUT
       
         
